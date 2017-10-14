@@ -1,0 +1,42 @@
+Install Instructions
+
+----------------------------------------------------------------
+Clone working SD card
+
+The quickest install method is cloning an SD card with a working install.
+Note that the new SD card must have the same or greater amount of space available than on the original.
+
+- Download Win32DiskImager onto a Windows machine
+- Insert SD card, open Win32DiskImager, and enter a path and file name for the desired output image file
+- Select the correct drive letter under "Device" on the right
+- Click "Read"
+- When finished, remove the original SD card and insert new one to clone to
+- Clear and format the new SD card, ensuring all partitions are removed (except the primary)
+- In Win32DiskImager, select the new drive's letter and the previously saved image file
+- Click "Write"
+
+----------------------------------------------------------------
+Installing from scratch
+
+- Install phidgets libraries for Linux: phidgets.com/docs/OS_-_Linux
+- Also install phidgets python libraries: phidgets.com/docs/Language_-_Python
+- Install wiringpi: wiringpi.com/download-and-install/
+- In /home/pi/.config/autostart, create a file named MediaProject.desktop which contains the following:
+
+[Desktop Entry]
+Exec=lxterminal -e "sudo /home/pi/Desktop/MediaProject/MediaProject.py"
+Type=Application
+
+- Ensure that MediaProject.py has its permissions set so that anyone can execute it
+- Restart the pi. The program should now automatically run on startup in a terminal window
+
+----------------------------------------------------------------
+Running the scripts (after installation is complete)
+
+To manually run the project script, open an terminal and navigate to the project folder. Then run:
+sudo python MediaProject.py
+
+To run the button and remote config script:
+sudo python RemoteCommandSetup.py
+
+Do not manually edit the MediaProject_IR_Commands.py file unless you understand how the remote command setup script works!

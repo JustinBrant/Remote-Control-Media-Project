@@ -1,0 +1,74 @@
+Changing user settings
+
+User settings are located in MediaProjectConfig.py. Do not change the variable names, only the values!
+
+----------------------------------------------------------------
+Reorganizing button layout
+
+The first block of variables (Button_HDMI, etc) determine what order the buttons are on the remote.
+Values must be from 0 to 5, and all values must be different (don't have two buttons indexed to the same number).
+The indices start at 0 at the bottom of the remote, opposite the IR blaster.
+
+For example, to make the bottom button the HDMI switch, change Button_HDMI to 0 and change the button variable that is currently 0 to the old value of Button_HDMI.
+
+Full example:
+To make the button functions be the following, from top to bottom:
+HDMI, channel up, channel down, TV power, mute, nothing (or extra)
+Change the button variables to the following:
+Button_HDMI        = 5
+Button_ChannelUp   = 4
+Button_ChannelDown = 3
+Button_TvOnOff     = 2
+Button_Mute        = 1
+Button_Extra       = 0
+
+----------------------------------------------------------------
+Volume control settings
+
+Note that the volume control knob used is a quadrature encoder (so turning direction is known) which ticks 1200 times per revolution.
+
+TicksPerVolumeCommand
+Number of ticks that must occur to be registered as 1 volume control command, either up or down.
+Increase this value to reduce the sensitivity of the knob, making the user turn the dial further to generate 1 volume command, and vice versa.
+Original default value: 12
+
+DeadzoneTicks
+Program ignores volume dial movements until the number of ticks turned since the last deadzone reset is greater than this value. After this limit is exceeded, TicksPerVolumeCommand determines volume control sensitivity.
+This avoids inadvertently changing the volume when the remote is bumped.
+Original default value: 30
+
+DeadzoneResetTimeMilliseconds
+Amount of time, in milliseconds, that the volume dial must be untouched until the deadzone resets.
+Original default value: 200
+
+PositiveVolumeDirection
+Rotation direction that the program interprets as increasing the volume.
+Value must be a string, and can be either "CW" or "CCW" (including the double quotes) for clockwise or counterclockwise.
+Original default value: "CW"
+
+----------------------------------------------------------------
+Button LEDs
+
+The button LEDs are dim ("DIM") most of the time, when no controls have been used for a period of time. As soon as a button is pressed or the volume dial is turned, all buttons brighten up ("ON"). A button's individual LED will turn off for a period of time when it is pressed.
+
+ButtonBrightnessPercent_ON
+Brightness of the buttons when there is activity, as a percent from 0 to 100
+Original default value: 60
+
+ButtonBrightnessPercent_DIM
+Brightness of the buttons when there is no activity, as a percent from 0 to 100
+Original default value: 15
+
+ButtonDimTimeoutSeconds
+Number of seconds before buttons dim after no activity
+Original default value: 10
+
+VolumeDialBrightensLEDs
+Controls whether volume dial activity brightens buttons
+Can be 0 or 1, for "off" and "on"
+Original default value: 1
+
+ButtonOffWhenPressedTimeSeconds
+Number of seconds a button LED turns off for when pressed
+Set to 0 to disable
+Original default value: 0.5
